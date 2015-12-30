@@ -292,8 +292,144 @@
 <span id="250">250</span>
 <span id="251">251</span>
 <span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='ident'>Read</span>, <span class='ident'>Write</span>, <span class='ident'>Seek</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashSet</span>;
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>PW_KEY_SIZE</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>64</span>;
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>IV_SIZE</span>: <span class='ident'>usize</span> <span class='op'>=</span> <span class='number'>16</span>;
@@ -302,6 +438,7 @@
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>IvArray</span> <span class='op'>=</span> [<span class='ident'>u8</span>; <span class='ident'>IV_SIZE</span>];
 
+<span class='doccomment'>/// The current encryption mode.  Initially set to Unknown.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Mode</span> {
     <span class='ident'>Unknown</span>,
     <span class='ident'>Encrypt</span>,
@@ -316,55 +453,111 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>SeekWrite</span> <span class='kw'>for</span> <span class='ident'>T</span> <span class='kw'>where</span> <span class='ident'>T</span>: <span class='ident'>Seek</span> <span class='op'>+</span> <span class='ident'>Write</span>
 {}
 
-
-<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>FileOptions</span> {
-    <span class='prelude-val'>None</span>,
-    <span class='ident'>AllowOverwrite</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>PartialEq</span>,<span class='ident'>Eq</span>,<span class='ident'>Hash</span>)]</span>
+<span class='doccomment'>/// Output options.</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>OutputOption</span> {
+    <span class='doccomment'>/// If the output file exists and this is set, it will be overwritten.  If this is NOT set</span>
+    <span class='doccomment'>/// and the file exists, encryption/decryption will return an error.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This setting is disabled by default.</span>
+    <span class='ident'>AllowOverwrite</span>,
+    <span class='doccomment'>/// Controls whether metadata about the generated key is included (as cleartext)</span>
+    <span class='doccomment'>/// in the output file.</span>
+    <span class='doccomment'>/// For example, if scrypt is used, the metadata contains the Log(N),R,and P</span>
+    <span class='doccomment'>/// parameters vaues that were provided to scrypt to</span>
+    <span class='doccomment'>/// generate the key.  The metadata does not include the</span>
+    <span class='doccomment'>/// original password text or salt.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This provides a margin of safety in case the original parameters are</span>
+    <span class='doccomment'>/// lost and the file needs to be decrypted; however, it also make it easier for an attacker</span>
+    <span class='doccomment'>/// to run brute force attacks since he will know what parameters to use.</span>
+    <span class='doccomment'>/// This setting only affects password types that use the</span>
+    <span class='doccomment'>/// `PasswordKeyGenMethod` enum.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This setting enabled by default.</span>
+    <span class='ident'>IncludeKeyMetadata</span>,
 }
 
+<span class='doccomment'>/// Data input streams.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>InputStream</span> {
     <span class='ident'>Unknown</span>,
+    <span class='doccomment'>/// Read from the specified file.</span>
     <span class='ident'>File</span>(<span class='ident'>String</span>),
 }
 
+<span class='doccomment'>/// Data output streams.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>OutputStream</span> {
     <span class='ident'>Unknown</span>,
-    <span class='ident'>File</span>(<span class='ident'>String</span>,<span class='ident'>FileOptions</span>),
+    <span class='doccomment'>/// Write to the specified file.</span>
+    <span class='ident'>File</span>(<span class='ident'>String</span>),
 }
 
+<span class='doccomment'>/// Output format.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>OutputFormat</span> {
     <span class='comment'>// EncryptedZip,</span>
+    <span class='doccomment'>/// The default output format.  This can only (currently) be read by this program.</span>
     <span class='ident'>EncryptFile</span>,
 }
 
+<span class='doccomment'>/// Controls how random numbers are generated whenever they are needed by this library.</span>
+<span class='doccomment'>/// Currently this is only required when generating an initialization vector</span>
+<span class='doccomment'>/// (`InitializationVector::GenerateFromRng`).  Note, when decrypting, you do not need</span>
+<span class='doccomment'>/// to specify this.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>RngMode</span> {
+    <span class='doccomment'>/// Use the [Os RNG](https://doc.rust-lang.org/rand/rand/os/struct.OsRng.html) only</span>
     <span class='ident'>Os</span>,
+    <span class='doccomment'>/// Use a combination of the Os and</span>
+    <span class='doccomment'>/// [Isaac64](https://doc.rust-lang.org/rand/rand/isaac/struct.Isaac64Rng.html) generators.</span>
+    <span class='doccomment'>/// Isaac is seeded with the Os RNG,</span>
+    <span class='doccomment'>/// and the two RNGs are used to generate the resulting IV 50/50.</span>
     <span class='ident'>OsIssac</span>,
+    <span class='doccomment'>/// Use a combination of the Os,</span>
+    <span class='doccomment'>/// [`rand::random`](https://doc.rust-lang.org/rand/rand/fn.random.html), and Isaac.</span>
+    <span class='doccomment'>/// Isaac is seeded with the Os Rng</span>
+    <span class='doccomment'>/// and rand.  Os and Isaac are used to generate the resulting IV 50/50.</span>
     <span class='ident'>OsRandIssac</span>,
+    <span class='doccomment'>/// Use the specified function to generate random u8 values.  The function should return a</span>
+    <span class='doccomment'>/// random u8 each time it is called.</span>
     <span class='ident'>Func</span>(<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>() <span class='op'>-&gt;</span> <span class='ident'>u8</span><span class='op'>&gt;</span>),
 }
 
+<span class='doccomment'>/// Specifies the initialization vector.  Note, when decrypting, you do not need to specify</span>
+<span class='doccomment'>/// this since the IV is in the file.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>InitializationVector</span> {
     <span class='ident'>Unknown</span>,
+    <span class='doccomment'>/// Generate the vector randomly.  See `RngMode`.</span>
     <span class='ident'>GenerateFromRng</span>,
+    <span class='doccomment'>/// Use the specified function to provide the IV.  It should return a fully populated IV</span>
+    <span class='doccomment'>/// array.</span>
     <span class='ident'>Func</span>(<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>() <span class='op'>-&gt;</span> <span class='ident'>IvArray</span><span class='op'>&gt;</span>),
 }
 
+<span class='doccomment'>/// Specifies the encryption method.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>EncryptionMethod</span> {
     <span class='ident'>AesCbc256</span>,
 }
 
+<span class='doccomment'>/// The Scrypt LogN parameter.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ScryptLogN</span>(<span class='kw'>pub</span> <span class='ident'>u8</span>);
+<span class='doccomment'>/// The Scrypt R parameter.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ScryptR</span>(<span class='kw'>pub</span> <span class='ident'>u32</span>);
+<span class='doccomment'>/// The Scrypt P parameter.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ScryptP</span>(<span class='kw'>pub</span> <span class='ident'>u32</span>);
+<span class='doccomment'>/// Controls how the encryption key is generated from a text password.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>PasswordKeyGenMethod</span> {
+    <span class='doccomment'>/// Use the scrypt algorithm.</span>
+    <span class='doccomment'>/// http://www.tarsnap.com/scrypt/scrypt-slides.pdf</span>
     <span class='ident'>Scrypt</span>(<span class='ident'>ScryptLogN</span>, <span class='ident'>ScryptR</span>, <span class='ident'>ScryptP</span>),
+    <span class='ident'>ReadFromFile</span>,
 }
-
+<span class='doccomment'>/// Specifies the encryption password.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>PasswordType</span> {
     <span class='ident'>Unknown</span>,
-    <span class='ident'>Text</span>(<span class='ident'>String</span>, <span class='ident'>PasswordKeyGenMethod</span>), <span class='comment'>/* Note: leading/trailing whitespace is not trimmed on string */</span>
-    <span class='ident'>Data</span>(<span class='ident'>PwKeyArray</span>),
+    <span class='doccomment'>/// Use the specified text string and PasswordKeyGenMethod.</span>
+    <span class='doccomment'>/// Leading/trailing whitespace is not trimmed on the string.  Consider specifying</span>
+    <span class='doccomment'>/// salt via `Config.salt()`.</span>
+    <span class='ident'>Text</span>(<span class='ident'>String</span>, <span class='ident'>PasswordKeyGenMethod</span>),
+    <span class='doccomment'>/// Use the specified function to provide the key.</span>
     <span class='ident'>Func</span>(<span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>() <span class='op'>-&gt;</span> <span class='ident'>PwKeyArray</span><span class='op'>&gt;</span>),
 }
 
@@ -375,46 +568,68 @@
     <span class='ident'>InvalidOutputStream</span>,
     <span class='ident'>PasswordTypeIsUnknown</span>,
     <span class='ident'>PasswordIsEmpty</span>,
-    <span class='ident'>PasswordDataIsAllZero</span>,
     <span class='ident'>BufferTooSmall</span>,
 }
 
+<span class='doccomment'>/// The main Configuration type.  This is a Builder object [1].</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// A config object can be reused; for instance, you can initially configure it</span>
+<span class='doccomment'>/// for encryption using `encrypt()`, then switch it to decryption with `decrypt()`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// [1]: https://aturon.github.io/ownership/builders.html</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Config</span> {
-    <span class='kw'>pub</span> <span class='ident'>mode</span>: <span class='ident'>Mode</span>,
-    <span class='kw'>pub</span> <span class='ident'>input_stream</span>: <span class='ident'>InputStream</span>,
-    <span class='kw'>pub</span> <span class='ident'>output_stream</span>: <span class='ident'>OutputStream</span>,
-    <span class='kw'>pub</span> <span class='ident'>output_format</span>: <span class='ident'>OutputFormat</span>,
-    <span class='kw'>pub</span> <span class='ident'>rng_mode</span>: <span class='ident'>RngMode</span>,
-    <span class='kw'>pub</span> <span class='ident'>initialization_vector</span>: <span class='ident'>InitializationVector</span>,
-    <span class='kw'>pub</span> <span class='ident'>password</span>: <span class='ident'>PasswordType</span>,
-    <span class='kw'>pub</span> <span class='ident'>salt</span>: <span class='ident'>String</span>,
-    <span class='kw'>pub</span> <span class='ident'>encryption_method</span>: <span class='ident'>EncryptionMethod</span>,
-    <span class='kw'>pub</span> <span class='ident'>buffer_size</span>: <span class='ident'>usize</span>,
+    <span class='ident'>mode</span>: <span class='ident'>Mode</span>,
+    <span class='ident'>input_stream</span>: <span class='ident'>InputStream</span>,
+    <span class='ident'>output_stream</span>: <span class='ident'>OutputStream</span>,
+    <span class='ident'>output_format</span>: <span class='ident'>OutputFormat</span>,
+    <span class='ident'>output_options</span>: <span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>OutputOption</span><span class='op'>&gt;</span>,
+    <span class='ident'>rng_mode</span>: <span class='ident'>RngMode</span>,
+    <span class='ident'>initialization_vector</span>: <span class='ident'>InitializationVector</span>,
+    <span class='ident'>password</span>: <span class='ident'>PasswordType</span>,
+    <span class='ident'>salt</span>: <span class='ident'>String</span>,
+    <span class='ident'>encryption_method</span>: <span class='ident'>EncryptionMethod</span>,
+    <span class='ident'>buffer_size</span>: <span class='ident'>usize</span>,
 }
 
+<span class='doccomment'>/// Returns true if the specfied slice contains all zero values, false otherwise.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>slice_is_zeroed</span>(<span class='ident'>d</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
     <span class='ident'>d</span>.<span class='ident'>iter</span>().<span class='ident'>find</span>(<span class='op'>|</span><span class='ident'>b</span><span class='op'>|</span> <span class='op'>*</span><span class='op'>*</span><span class='ident'>b</span> <span class='op'>!=</span> <span class='number'>0</span>).<span class='ident'>is_none</span>()
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>test</span>))]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>default_scrypt_params</span>() <span class='op'>-&gt;</span> <span class='ident'>PasswordKeyGenMethod</span> {
+<span class='doccomment'>/// Returns a set of default scrypt parameters: LogN 16, R 8, P 1.</span>
+<span class='doccomment'>/// See http://www.tarsnap.com/scrypt/scrypt-slides.pdf for more details.</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>scrypt_defaults</span>() <span class='op'>-&gt;</span> <span class='ident'>PasswordKeyGenMethod</span> {
     <span class='comment'>// http://stackoverflow.com/questions/11126315/what-are-optimal-scrypt-work-factors</span>
     <span class='ident'>PasswordKeyGenMethod</span>::<span class='ident'>Scrypt</span>(<span class='ident'>ScryptLogN</span>(<span class='number'>16</span>), <span class='ident'>ScryptR</span>(<span class='number'>8</span>), <span class='ident'>ScryptP</span>(<span class='number'>1</span>))
 }
 <span class='comment'>// todo: fix &#39;doc&#39; after this is fixed: https://github.com/rust-lang/rfcs/issues/915</span>
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>test</span>,<span class='ident'>doc</span>))]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>default_scrypt_params</span>() <span class='op'>-&gt;</span> <span class='ident'>PasswordKeyGenMethod</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>scrypt_defaults</span>() <span class='op'>-&gt;</span> <span class='ident'>PasswordKeyGenMethod</span> {
     <span class='comment'>// don&#39;t melt my laptop</span>
     <span class='ident'>PasswordKeyGenMethod</span>::<span class='ident'>Scrypt</span>(<span class='ident'>ScryptLogN</span>(<span class='number'>4</span>), <span class='ident'>ScryptR</span>(<span class='number'>1</span>), <span class='ident'>ScryptP</span>(<span class='number'>1</span>))
 }
 
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>dead_code</span>)]</span>
+<span class='doccomment'>/// Returns a set of scrypt parameters tuned for file encryption: LogN 20, R 8, P 1</span>
+<span class='doccomment'>/// See http://www.tarsnap.com/scrypt/scrypt-slides.pdf for more details.</span>
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>scrypt_params_encrypt1</span>() <span class='op'>-&gt;</span> <span class='ident'>PasswordKeyGenMethod</span> {
+    <span class='ident'>PasswordKeyGenMethod</span>::<span class='ident'>Scrypt</span>(<span class='ident'>ScryptLogN</span>(<span class='number'>20</span>), <span class='ident'>ScryptR</span>(<span class='number'>8</span>), <span class='ident'>ScryptP</span>(<span class='number'>1</span>))
+}
+
 <span class='kw'>impl</span> <span class='ident'>Config</span> {
+    <span class='doccomment'>/// Constructs a new Config with default settings.  At a minimum, you must set input</span>
+    <span class='doccomment'>/// streams and a password method, and configure it for encryption or decryption.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>def_opts</span> <span class='op'>=</span> <span class='ident'>HashSet</span>::<span class='ident'>new</span>();
+        <span class='ident'>def_opts</span>.<span class='ident'>insert</span>(<span class='ident'>OutputOption</span>::<span class='ident'>IncludeKeyMetadata</span>);
+
         <span class='ident'>Config</span> {
             <span class='ident'>mode</span>: <span class='ident'>Mode</span>::<span class='ident'>Unknown</span>,
             <span class='ident'>input_stream</span>: <span class='ident'>InputStream</span>::<span class='ident'>Unknown</span>,
             <span class='ident'>output_stream</span>: <span class='ident'>OutputStream</span>::<span class='ident'>Unknown</span>,
             <span class='ident'>output_format</span>: <span class='ident'>OutputFormat</span>::<span class='ident'>EncryptFile</span>,
+            <span class='ident'>output_options</span>: <span class='ident'>def_opts</span>,
             <span class='ident'>rng_mode</span>: <span class='ident'>RngMode</span>::<span class='ident'>OsIssac</span>,
             <span class='ident'>initialization_vector</span>: <span class='ident'>InitializationVector</span>::<span class='ident'>GenerateFromRng</span>,
             <span class='ident'>password</span>: <span class='ident'>PasswordType</span>::<span class='ident'>Unknown</span>,
@@ -424,48 +639,77 @@
         }
     }
 
+    <span class='doccomment'>/// Enable decryption mode.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>decrypt</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>mode</span> <span class='op'>=</span> <span class='ident'>Mode</span>::<span class='ident'>Decrypt</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Enable encryption mode.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encrypt</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>mode</span> <span class='op'>=</span> <span class='ident'>Mode</span>::<span class='ident'>Encrypt</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set the input stream.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>input_stream</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>is</span>: <span class='ident'>InputStream</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>input_stream</span> <span class='op'>=</span> <span class='ident'>is</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set the output stream.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>output_stream</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>os</span>: <span class='ident'>OutputStream</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>output_stream</span> <span class='op'>=</span> <span class='ident'>os</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set output options.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>output_options</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>opts</span>: <span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>OutputOption</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
+        <span class='self'>self</span>.<span class='ident'>output_options</span> <span class='op'>=</span> <span class='ident'>opts</span>;
+        <span class='self'>self</span>
+    }
+    <span class='doccomment'>/// Add an output option.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_output_option</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>opt</span>: <span class='ident'>OutputOption</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
+        <span class='self'>self</span>.<span class='ident'>output_options</span>.<span class='ident'>insert</span>(<span class='ident'>opt</span>);
+        <span class='self'>self</span>
+    }
+    <span class='doccomment'>/// Remove an output option.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>remove_output_option</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>opt</span>: <span class='ident'>OutputOption</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
+        <span class='self'>self</span>.<span class='ident'>output_options</span>.<span class='ident'>remove</span>(<span class='kw-2'>&amp;</span><span class='ident'>opt</span>);
+        <span class='self'>self</span>
+    }
+    <span class='doccomment'>/// Set the random number mode.  See the `RngMode` enum for information</span>
+    <span class='doccomment'>/// on how this is used.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>rng_mode</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>rng_mode</span>: <span class='ident'>RngMode</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>rng_mode</span> <span class='op'>=</span> <span class='ident'>rng_mode</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set the method of determining the initialization vector.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>initialization_vector</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>,
                                  <span class='ident'>initialization_vector</span>: <span class='ident'>InitializationVector</span>)
                                  <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>initialization_vector</span> <span class='op'>=</span> <span class='ident'>initialization_vector</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set the password method.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>password</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>password</span>: <span class='ident'>PasswordType</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>password</span> <span class='op'>=</span> <span class='ident'>password</span>;
         <span class='self'>self</span>
     }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>salt</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>salt</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
-        <span class='self'>self</span>.<span class='ident'>salt</span> <span class='op'>=</span> <span class='ident'>salt</span>;
+    <span class='doccomment'>/// Set the salt.  Only used in password methods that require it; if not set,</span>
+    <span class='doccomment'>/// defaults to &quot;DefaultSalt&quot;.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>salt</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>salt</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
+        <span class='self'>self</span>.<span class='ident'>salt</span> <span class='op'>=</span> <span class='ident'>salt</span>.<span class='ident'>to_owned</span>();
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set the encryption method.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>encryption_method</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>encryption_method</span>: <span class='ident'>EncryptionMethod</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>encryption_method</span> <span class='op'>=</span> <span class='ident'>encryption_method</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Set the buffer size used for encryption and decryption.  Default is 65536 bytes.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>buffer_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buffer_size</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='kw'>Self</span> {
         <span class='self'>self</span>.<span class='ident'>buffer_size</span> <span class='op'>=</span> <span class='ident'>buffer_size</span>;
         <span class='self'>self</span>
     }
+    <span class='doccomment'>/// Validate the encryption object; it is not necessary to call this manually since the</span>
+    <span class='doccomment'>/// configuration will be validated when it is used.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>validate</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>ValidateError</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='ident'>Mode</span>::<span class='ident'>Unknown</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>mode</span> {
             <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValidateError</span>::<span class='ident'>ModeNotSet</span>);
@@ -482,12 +726,6 @@
                 <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValidateError</span>::<span class='ident'>PasswordIsEmpty</span>)
             }
 
-            <span class='ident'>PasswordType</span>::<span class='ident'>Data</span>(<span class='kw-2'>ref</span> <span class='ident'>d</span>) <span class='op'>=&gt;</span> {
-                <span class='kw'>if</span> <span class='ident'>slice_is_zeroed</span>(<span class='ident'>d</span>) {
-                    <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ValidateError</span>::<span class='ident'>PasswordDataIsAllZero</span>);
-                }
-            }
-
             <span class='ident'>PasswordType</span>::<span class='ident'>Func</span>(_) <span class='op'>|</span>
             <span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(_, _) <span class='op'>=&gt;</span> (),
         }
@@ -496,6 +734,40 @@
         }
 
         <span class='prelude-val'>Ok</span>(())
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_mode</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>Mode</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>mode</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_input_stream</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>InputStream</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>input_stream</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_output_stream</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>OutputStream</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>output_stream</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_output_format</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>OutputFormat</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>output_format</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_output_options</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>HashSet</span><span class='op'>&lt;</span><span class='ident'>OutputOption</span><span class='op'>&gt;</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>output_options</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_rng_mode</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>RngMode</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>rng_mode</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_initialization_vector</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>InitializationVector</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>initialization_vector</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_password</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>PasswordType</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>password</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_salt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>str</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>salt</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_encryption_method</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>EncryptionMethod</span> {
+        <span class='kw'>return</span> <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>encryption_method</span>;
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_buffer_size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
+        <span class='kw'>return</span> <span class='self'>self</span>.<span class='ident'>buffer_size</span>;
     }
 }
 
@@ -525,19 +797,17 @@
     <span class='macro'>check</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>ValidateError</span>::<span class='ident'>InvalidInputStream</span>);
     <span class='ident'>c</span>.<span class='ident'>input_stream</span>(<span class='ident'>InputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/foo&quot;</span>.<span class='ident'>to_owned</span>()));
     <span class='macro'>check</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>ValidateError</span>::<span class='ident'>InvalidOutputStream</span>);
-    <span class='ident'>c</span>.<span class='ident'>output_stream</span>(<span class='ident'>OutputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/foo.out&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>FileOptions</span>::<span class='prelude-val'>None</span>));
+    <span class='ident'>c</span>.<span class='ident'>output_stream</span>(<span class='ident'>OutputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/foo.out&quot;</span>.<span class='ident'>to_owned</span>()));
     <span class='macro'>check</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>ValidateError</span>::<span class='ident'>PasswordTypeIsUnknown</span>);
 
-    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>default_scrypt_params</span>()));
+    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>scrypt_defaults</span>()));
     <span class='macro'>check</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>ValidateError</span>::<span class='ident'>PasswordIsEmpty</span>);
-    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;    &quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>default_scrypt_params</span>()));
+    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;    &quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>scrypt_defaults</span>()));
     <span class='macro'>check_ok</span><span class='macro'>!</span>(<span class='ident'>c</span>);
 
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>pd</span>: [<span class='ident'>u8</span>; <span class='ident'>PW_KEY_SIZE</span>] <span class='op'>=</span> [<span class='number'>0</span>; <span class='ident'>PW_KEY_SIZE</span>];
-    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Data</span>(<span class='ident'>pd</span>));
-    <span class='macro'>check</span><span class='macro'>!</span>(<span class='ident'>c</span>, <span class='ident'>ValidateError</span>::<span class='ident'>PasswordDataIsAllZero</span>);
     <span class='ident'>pd</span>[<span class='number'>0</span>] <span class='op'>=</span> <span class='number'>1</span>;
-    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Data</span>(<span class='ident'>pd</span>));
+    <span class='ident'>c</span>.<span class='ident'>password</span>(<span class='ident'>PasswordType</span>::<span class='ident'>Func</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='kw'>move</span> <span class='op'>||</span> <span class='ident'>pd</span>)));
     <span class='macro'>check_ok</span><span class='macro'>!</span>(<span class='ident'>c</span>);
 
     <span class='ident'>c</span>.<span class='ident'>buffer_size</span>(<span class='number'>0</span>);

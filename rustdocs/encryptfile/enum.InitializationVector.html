@@ -45,13 +45,18 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-49' class='srclink' href='../src/encryptfile/config.rs.html#52-56' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-69' class='srclink' href='../src/encryptfile/config.rs.html#96-103' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum InitializationVector {
     Unknown,
     GenerateFromRng,
     Func(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>() -&gt; <a class='type' href='../encryptfile/type.IvArray.html' title='encryptfile::IvArray'>IvArray</a>&gt;),
-}</pre><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Unknown'><code>Unknown</code></td><td></td></tr><tr><td id='variant.GenerateFromRng'><code>GenerateFromRng</code></td><td></td></tr><tr><td id='variant.Func'><code>Func</code></td><td></td></tr></table></section>
+}</pre><div class='docblock'><p>Specifies the initialization vector.  Note, when decrypting, you do not need to specify
+this since the IV is in the file.</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.Unknown'><code>Unknown</code></td><td></td></tr><tr><td id='variant.GenerateFromRng'><code>GenerateFromRng</code></td><td><div class='docblock'><p>Generate the vector randomly.  See <code>RngMode</code>.</p>
+</div></td></tr><tr><td id='variant.Func'><code>Func</code></td><td><div class='docblock'><p>Use the specified function to provide the IV.  It should return a fully populated IV
+array.</p>
+</div></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

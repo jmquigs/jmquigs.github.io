@@ -45,14 +45,29 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-43' class='srclink' href='../src/encryptfile/config.rs.html#45-50' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-63' class='srclink' href='../src/encryptfile/config.rs.html#76-92' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum RngMode {
     Os,
     OsIssac,
     OsRandIssac,
     Func(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>() -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;),
-}</pre><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Os'><code>Os</code></td><td></td></tr><tr><td id='variant.OsIssac'><code>OsIssac</code></td><td></td></tr><tr><td id='variant.OsRandIssac'><code>OsRandIssac</code></td><td></td></tr><tr><td id='variant.Func'><code>Func</code></td><td></td></tr></table></section>
+}</pre><div class='docblock'><p>Controls how random numbers are generated whenever they are needed by this library.
+Currently this is only required when generating an initialization vector
+(<code>InitializationVector::GenerateFromRng</code>).  Note, when decrypting, you do not need
+to specify this.</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.Os'><code>Os</code></td><td><div class='docblock'><p>Use the <a href="https://doc.rust-lang.org/rand/rand/os/struct.OsRng.html">Os RNG</a> only</p>
+</div></td></tr><tr><td id='variant.OsIssac'><code>OsIssac</code></td><td><div class='docblock'><p>Use a combination of the Os and
+<a href="https://doc.rust-lang.org/rand/rand/isaac/struct.Isaac64Rng.html">Isaac64</a> generators.
+Isaac is seeded with the Os RNG,
+and the two RNGs are used to generate the resulting IV 50/50.</p>
+</div></td></tr><tr><td id='variant.OsRandIssac'><code>OsRandIssac</code></td><td><div class='docblock'><p>Use a combination of the Os,
+<a href="https://doc.rust-lang.org/rand/rand/fn.random.html"><code>rand::random</code></a>, and Isaac.
+Isaac is seeded with the Os Rng
+and rand.  Os and Isaac are used to generate the resulting IV 50/50.</p>
+</div></td></tr><tr><td id='variant.Func'><code>Func</code></td><td><div class='docblock'><p>Use the specified function to generate random u8 values.  The function should return a
+random u8 each time it is called.</p>
+</div></td></tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

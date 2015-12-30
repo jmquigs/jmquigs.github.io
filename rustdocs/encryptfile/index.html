@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-0' class='srclink' href='../src/encryptfile/lib.rs.html#1-468' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-0' class='srclink' href='../src/encryptfile/lib.rs.html#1-481' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This library provides an interface to Rust Crypto(<a href="https://github.com/DaGenix/rust-crypto">1</a>) for encrypting and decrypting files.
 It provides the following features:</p>
 
@@ -59,9 +59,13 @@ It provides the following features:</p>
 <ol>
 <li><p>Support for different encryption methods or output formats.</p></li>
 <li><p>Support for encryption libraries other than rust crypto</p></li>
+<li><p>Support for arbitrary user-provided metadata that is included (encrypted)
+with the output file.</p></li>
 </ol>
 
-<p>This library is <a href="https://github.com/jmquigs/rs-encryptfile">on GitHub</a>.</p>
+<p>This library is <a href="https://github.com/jmquigs/rs-encryptfile">on GitHub</a>.
+Feel free to make feature suggestions in the
+   <a href="https://github.com/jmquigs/rs-encryptfile/issues">issue tracker</a>.</p>
 
 <h2 id='example' class='section-header'><a href='#example'>Example</a></h2><pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>encryptfile</span> <span class='kw'>as</span> <span class='ident'>ef</span>;
@@ -71,19 +75,19 @@ It provides the following features:</p>
 <span class='ident'>in_file</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;/.bash_history&quot;</span>);
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>ef</span>::<span class='ident'>Config</span>::<span class='ident'>new</span>();
 <span class='ident'>c</span>.<span class='ident'>input_stream</span>(<span class='ident'>ef</span>::<span class='ident'>InputStream</span>::<span class='ident'>File</span>(<span class='ident'>in_file</span>.<span class='ident'>to_owned</span>()))
- .<span class='ident'>output_stream</span>(<span class='ident'>ef</span>::<span class='ident'>OutputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/tmp/__encrypted_bash_history.ef&quot;</span>.<span class='ident'>to_owned</span>(),
-    <span class='ident'>ef</span>::<span class='ident'>FileOptions</span>::<span class='ident'>AllowOverwrite</span>))
+ .<span class='ident'>output_stream</span>(<span class='ident'>ef</span>::<span class='ident'>OutputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/tmp/__encrypted_bash_history.ef&quot;</span>.<span class='ident'>to_owned</span>()))
+ .<span class='ident'>add_output_option</span>(<span class='ident'>ef</span>::<span class='ident'>OutputOption</span>::<span class='ident'>AllowOverwrite</span>)
  .<span class='ident'>initialization_vector</span>(<span class='ident'>ef</span>::<span class='ident'>InitializationVector</span>::<span class='ident'>GenerateFromRng</span>)
- .<span class='ident'>password</span>(<span class='ident'>ef</span>::<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;iloveyou&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>ef</span>::<span class='ident'>default_scrypt_params</span>()))
+ .<span class='ident'>password</span>(<span class='ident'>ef</span>::<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;iloveyou&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>ef</span>::<span class='ident'>scrypt_defaults</span>()))
  .<span class='ident'>encrypt</span>();
 <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>ef</span>::<span class='ident'>process</span>(<span class='kw-2'>&amp;</span><span class='ident'>c</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;error encrypting: {:?}&quot;</span>, <span class='ident'>e</span>));
 
 <span class='comment'>// Decrypt</span>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>ef</span>::<span class='ident'>Config</span>::<span class='ident'>new</span>();
 <span class='ident'>c</span>.<span class='ident'>input_stream</span>(<span class='ident'>ef</span>::<span class='ident'>InputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/tmp/__encrypted_bash_history.ef&quot;</span>.<span class='ident'>to_owned</span>()))
- .<span class='ident'>output_stream</span>(<span class='ident'>ef</span>::<span class='ident'>OutputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/tmp/__encrypted_bash_history.txt&quot;</span>.<span class='ident'>to_owned</span>(),
-    <span class='ident'>ef</span>::<span class='ident'>FileOptions</span>::<span class='ident'>AllowOverwrite</span>))
- .<span class='ident'>password</span>(<span class='ident'>ef</span>::<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;iloveyou&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>ef</span>::<span class='ident'>default_scrypt_params</span>()))
+ .<span class='ident'>output_stream</span>(<span class='ident'>ef</span>::<span class='ident'>OutputStream</span>::<span class='ident'>File</span>(<span class='string'>&quot;/tmp/__encrypted_bash_history.txt&quot;</span>.<span class='ident'>to_owned</span>()))
+ .<span class='ident'>add_output_option</span>(<span class='ident'>ef</span>::<span class='ident'>OutputOption</span>::<span class='ident'>AllowOverwrite</span>)
+ .<span class='ident'>password</span>(<span class='ident'>ef</span>::<span class='ident'>PasswordType</span>::<span class='ident'>Text</span>(<span class='string'>&quot;iloveyou&quot;</span>.<span class='ident'>to_owned</span>(), <span class='ident'>ef</span>::<span class='ident'>PasswordKeyGenMethod</span>::<span class='ident'>ReadFromFile</span>))
  .<span class='ident'>decrypt</span>();
 <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>ef</span>::<span class='ident'>process</span>(<span class='kw-2'>&amp;</span><span class='ident'>c</span>).<span class='ident'>map_err</span>(<span class='op'>|</span><span class='ident'>e</span><span class='op'>|</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;error decrypting: {:?}&quot;</span>, <span class='ident'>e</span>));</pre>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
@@ -92,7 +96,8 @@ It provides the following features:</p>
                         <td><a class='struct' href='struct.Config.html'
                                title='encryptfile::Config'>Config</a></td>
                         <td class='docblock short'>
-                             
+                             <p>The main Configuration type.  This is a Builder object [1].</p>
+
                         </td>
                     </tr>
                 
@@ -100,7 +105,8 @@ It provides the following features:</p>
                         <td><a class='struct' href='struct.ScryptLogN.html'
                                title='encryptfile::ScryptLogN'>ScryptLogN</a></td>
                         <td class='docblock short'>
-                             
+                             <p>The Scrypt LogN parameter.</p>
+
                         </td>
                     </tr>
                 
@@ -108,7 +114,8 @@ It provides the following features:</p>
                         <td><a class='struct' href='struct.ScryptP.html'
                                title='encryptfile::ScryptP'>ScryptP</a></td>
                         <td class='docblock short'>
-                             
+                             <p>The Scrypt P parameter.</p>
+
                         </td>
                     </tr>
                 
@@ -116,7 +123,8 @@ It provides the following features:</p>
                         <td><a class='struct' href='struct.ScryptR.html'
                                title='encryptfile::ScryptR'>ScryptR</a></td>
                         <td class='docblock short'>
-                             
+                             <p>The Scrypt R parameter.</p>
+
                         </td>
                     </tr>
                 </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -130,18 +138,12 @@ It provides the following features:</p>
                     </tr>
                 
                     <tr class=' module-item'>
-                        <td><a class='enum' href='enum.FileOptions.html'
-                               title='encryptfile::FileOptions'>FileOptions</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
                         <td><a class='enum' href='enum.InitializationVector.html'
                                title='encryptfile::InitializationVector'>InitializationVector</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Specifies the initialization vector.  Note, when decrypting, you do not need to specify
+this since the IV is in the file.</p>
+
                         </td>
                     </tr>
                 
@@ -149,7 +151,8 @@ It provides the following features:</p>
                         <td><a class='enum' href='enum.InputStream.html'
                                title='encryptfile::InputStream'>InputStream</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Data input streams.</p>
+
                         </td>
                     </tr>
                 
@@ -157,7 +160,17 @@ It provides the following features:</p>
                         <td><a class='enum' href='enum.Mode.html'
                                title='encryptfile::Mode'>Mode</a></td>
                         <td class='docblock short'>
-                             
+                             <p>The current encryption mode.  Initially set to Unknown.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.OutputOption.html'
+                               title='encryptfile::OutputOption'>OutputOption</a></td>
+                        <td class='docblock short'>
+                             <p>Output options.</p>
+
                         </td>
                     </tr>
                 
@@ -165,7 +178,8 @@ It provides the following features:</p>
                         <td><a class='enum' href='enum.OutputStream.html'
                                title='encryptfile::OutputStream'>OutputStream</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Data output streams.</p>
+
                         </td>
                     </tr>
                 
@@ -173,7 +187,8 @@ It provides the following features:</p>
                         <td><a class='enum' href='enum.PasswordKeyGenMethod.html'
                                title='encryptfile::PasswordKeyGenMethod'>PasswordKeyGenMethod</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Controls how the encryption key is generated from a text password.</p>
+
                         </td>
                     </tr>
                 
@@ -181,7 +196,8 @@ It provides the following features:</p>
                         <td><a class='enum' href='enum.PasswordType.html'
                                title='encryptfile::PasswordType'>PasswordType</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Specifies the encryption password.</p>
+
                         </td>
                     </tr>
                 
@@ -189,7 +205,11 @@ It provides the following features:</p>
                         <td><a class='enum' href='enum.RngMode.html'
                                title='encryptfile::RngMode'>RngMode</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Controls how random numbers are generated whenever they are needed by this library.
+Currently this is only required when generating an initialization vector
+(<code>InitializationVector::GenerateFromRng</code>).  Note, when decrypting, you do not need
+to specify this.</p>
+
                         </td>
                     </tr>
                 </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
@@ -209,54 +229,35 @@ It provides the following features:</p>
                              
                         </td>
                     </tr>
-                </table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
-<table>
-                    <tr class=' module-item'>
-                        <td><a class='trait' href='trait.SeekRead.html'
-                               title='encryptfile::SeekRead'>SeekRead</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='trait' href='trait.SeekWrite.html'
-                               title='encryptfile::SeekWrite'>SeekWrite</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
                 </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.default_scrypt_params.html'
-                               title='encryptfile::default_scrypt_params'>default_scrypt_params</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.generate_iv.html'
-                               title='encryptfile::generate_iv'>generate_iv</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.make_scrypt_key.html'
-                               title='encryptfile::make_scrypt_key'>make_scrypt_key</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
                     <tr class=' module-item'>
                         <td><a class='fn' href='fn.process.html'
                                title='encryptfile::process'>process</a></td>
                         <td class='docblock short'>
-                             
+                             <p>Process the config and produce the result.  This function does not &quot;consume&quot; the config,
+so it can be reconfigured and reused after <code>process()</code> returns.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.scrypt_defaults.html'
+                               title='encryptfile::scrypt_defaults'>scrypt_defaults</a></td>
+                        <td class='docblock short'>
+                             <p>Returns a set of default scrypt parameters: LogN 16, R 8, P 1.
+See <a href="http://www.tarsnap.com/scrypt/scrypt-slides.pdf">http://www.tarsnap.com/scrypt/scrypt-slides.pdf</a> for more details.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.scrypt_params_encrypt1.html'
+                               title='encryptfile::scrypt_params_encrypt1'>scrypt_params_encrypt1</a></td>
+                        <td class='docblock short'>
+                             <p>Returns a set of scrypt parameters tuned for file encryption: LogN 20, R 8, P 1
+See <a href="http://www.tarsnap.com/scrypt/scrypt-slides.pdf">http://www.tarsnap.com/scrypt/scrypt-slides.pdf</a> for more details.</p>
+
                         </td>
                     </tr>
                 </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
