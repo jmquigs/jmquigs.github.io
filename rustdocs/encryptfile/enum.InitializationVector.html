@@ -45,18 +45,20 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-69' class='srclink' href='../src/encryptfile/config.rs.html#96-103' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-92' class='srclink' href='../src/encryptfile/config.rs.html#106-113' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum InitializationVector {
     Unknown,
     GenerateFromRng,
-    Func(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>() -&gt; <a class='type' href='../encryptfile/type.IvArray.html' title='encryptfile::IvArray'>IvArray</a>&gt;),
+    Func(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/rc/struct.Rc.html' title='alloc::rc::Rc'>Rc</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html' title='core::ops::Fn'>Fn</a>() -&gt; <a class='type' href='../encryptfile/type.IvArray.html' title='encryptfile::IvArray'>IvArray</a>&gt;&gt;),
 }</pre><div class='docblock'><p>Specifies the initialization vector.  Note, when decrypting, you do not need to specify
 this since the IV is in the file.</p>
 </div><h2 class='variants'>Variants</h2>
 <table><tr><td id='variant.Unknown'><code>Unknown</code></td><td></td></tr><tr><td id='variant.GenerateFromRng'><code>GenerateFromRng</code></td><td><div class='docblock'><p>Generate the vector randomly.  See <code>RngMode</code>.</p>
 </div></td></tr><tr><td id='variant.Func'><code>Func</code></td><td><div class='docblock'><p>Use the specified function to provide the IV.  It should return a fully populated IV
 array.</p>
-</div></td></tr></table></section>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../encryptfile/enum.InitializationVector.html' title='encryptfile::InitializationVector'>InitializationVector</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../encryptfile/enum.InitializationVector.html' title='encryptfile::InitializationVector'>InitializationVector</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

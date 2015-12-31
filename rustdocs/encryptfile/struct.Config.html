@@ -45,7 +45,7 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-109' class='srclink' href='../src/encryptfile/config.rs.html#150-162' title='goto source code'>[src]</a></span></h1>
+        </span><a id='src-172' class='srclink' href='../src/encryptfile/config.rs.html#183-196' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Config {
     // some fields omitted
 }</pre><div class='docblock'><p>The main Configuration type.  This is a Builder object <a href="https://aturon.github.io/ownership/builders.html">1</a>.</p>
@@ -75,7 +75,7 @@ on how this is used.</p>
 </div><h4 id='method.initialization_vector' class='method'><code>fn <a href='#method.initialization_vector' class='fnname'>initialization_vector</a>(&amp;mut self, initialization_vector: <a class='enum' href='../encryptfile/enum.InitializationVector.html' title='encryptfile::InitializationVector'>InitializationVector</a>) -&gt; &amp;mut Self</code></h4>
 <div class='docblock'><p>Set the method of determining the initialization vector.</p>
 </div><h4 id='method.password' class='method'><code>fn <a href='#method.password' class='fnname'>password</a>(&amp;mut self, password: <a class='enum' href='../encryptfile/enum.PasswordType.html' title='encryptfile::PasswordType'>PasswordType</a>) -&gt; &amp;mut Self</code></h4>
-<div class='docblock'><p>Set the password method.</p>
+<div class='docblock'><p>Set the password method.  Also clears the derived key.</p>
 </div><h4 id='method.salt' class='method'><code>fn <a href='#method.salt' class='fnname'>salt</a>(&amp;mut self, salt: &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut Self</code></h4>
 <div class='docblock'><p>Set the salt.  Only used in password methods that require it; if not set,
 defaults to &quot;DefaultSalt&quot;.</p>
@@ -83,6 +83,14 @@ defaults to &quot;DefaultSalt&quot;.</p>
 <div class='docblock'><p>Set the encryption method.</p>
 </div><h4 id='method.buffer_size' class='method'><code>fn <a href='#method.buffer_size' class='fnname'>buffer_size</a>(&amp;mut self, buffer_size: <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut Self</code></h4>
 <div class='docblock'><p>Set the buffer size used for encryption and decryption.  Default is 65536 bytes.</p>
+</div><h4 id='method.derive_key' class='method'><code>fn <a href='#method.derive_key' class='fnname'>derive_key</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='type' href='../encryptfile/type.PwKeyArray.html' title='encryptfile::PwKeyArray'>PwKeyArray</a>, <a class='enum' href='../encryptfile/enum.EncryptError.html' title='encryptfile::EncryptError'>EncryptError</a>&gt;</code></h4>
+<div class='docblock'><p>Derive the encryption key.  The key is returned and is also
+cached on this object (accessible via <code>get_derived_key()</code>).  See that function
+for details on how long this cached version persists.</p>
+
+<p>It is not necessary to call this if you are just calling <code>process()</code> on a file.
+But it is useful if you want to use the key to decrypt many files, or if you
+want to use the key for other purposes (such as calculating HMACs).</p>
 </div><h4 id='method.validate' class='method'><code>fn <a href='#method.validate' class='fnname'>validate</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, ValidateError&gt;</code></h4>
 <div class='docblock'><p>Validate the encryption object; it is not necessary to call this manually since the
 configuration will be validated when it is used.</p>
@@ -97,6 +105,11 @@ configuration will be validated when it is used.</p>
 <h4 id='method.get_salt' class='method'><code>fn <a href='#method.get_salt' class='fnname'>get_salt</a>(&amp;self) -&gt; &amp;<a href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <h4 id='method.get_encryption_method' class='method'><code>fn <a href='#method.get_encryption_method' class='fnname'>get_encryption_method</a>(&amp;self) -&gt; &amp;EncryptionMethod</code></h4>
 <h4 id='method.get_buffer_size' class='method'><code>fn <a href='#method.get_buffer_size' class='fnname'>get_buffer_size</a>(&amp;self) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<h4 id='method.get_derived_key' class='method'><code>fn <a href='#method.get_derived_key' class='fnname'>get_derived_key</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../encryptfile/type.PwKeyArray.html' title='encryptfile::PwKeyArray'>PwKeyArray</a>&gt;</code></h4>
+<div class='docblock'><p>If <code>derive_key()</code> has been called, returns the derived encryption key.  Otherwise returns
+None.  Each time <code>password()</code> is called, the derived key will be reset to None.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../encryptfile/struct.Config.html' title='encryptfile::Config'>Config</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../encryptfile/struct.Config.html' title='encryptfile::Config'>Config</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
